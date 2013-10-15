@@ -1,0 +1,86 @@
+
+ <html>
+    
+	<head> <title> Mike's Basketball Calculations using JavaScript </title></head>
+    
+	<body>
+    	
+
+    		<SCRIPT LANGUAGE ="JavaScript">
+    			
+			
+			
+			/* This block includes all the information inputted by the user. This block also includes declaration of variables(Lengths,Widths,Radiuss)*/
+			
+			var Lengths=parseFloat(prompt("Enter your desired length of the court in feet", "")); // "Lengths" is the length of the entire court
+			
+			var Widths=parseFloat(prompt("Enter your desired width of the court in feet", ""));   //"Widths" is the width of the entire court
+			
+			var Radiuss=parseFloat(prompt("Enter your desired radius of the circles in feet", ""));  //"Radiuss" is the radius of the circle
+			
+			
+			
+			/*This block includes all of my other variables and mainly all my calculations*/
+				
+			var p=Math.PI;  //This is the math "pie" constant
+			
+			var LengthGreen=Lengths/5;  //This is the length of the small green court
+			
+			var Diameter=2*Radiuss;	 //This is the diameter of the pink circle which equals twice the radius
+			
+			var SmallSquare=LengthGreen*Diameter;	//This is the area of the small square
+			
+			var RadiusSquared=Math.pow(Radiuss,2);	// This is used for the area of a circle calculation.
+    			
+			var AreaTwoCircles=2*p*RadiusSquared;	 //This is the area of the two pink circles	
+			
+			var AreaHalfCircle=((AreaTwoCircles)/(4));  // This is the area of one half of a pink circle
+			
+			var AreaEntireCourt=Lengths*Widths;  //This is the area of the entire yellow court
+			
+			var AreaOneGreenLane=((Lengths/5)-(AreaHalfCircle));  //The area of only one green court
+			
+			var AreaTwoGreenLanes=2*(((Lengths/5)*(Diameter))-(AreaHalfCircle));   //This is the same as above but two combined
+			
+			var AreaYellowField=(AreaEntireCourt)-(2*(SmallSquare+AreaHalfCircle));  //This area of the yellow section of the entire court
+			
+			var Circumference=2*p*Radiuss;   //This is the circumference of one circle
+			
+			var LinearDistanceBlackLines=Widths+(2*Lengths)+(2*Widths)+(2*Circumference)+(2*Diameter)+(4*(LengthGreen));  //This is the linear calculation of all black lines
+
+			
+			
+			/*This block is where all of the calculated information is displayed. I also used .toFixed for 2 sig figs. alert.window was also used to display all black lines calculations*/
+
+			document.write("<h2>Basketball Court Calculations</h2>"+"<br>"); //This is my heading
+			
+			document.write("<b>Desired Court Dimensions</b>"+"<br>");  //The is the bold title
+			
+			document.write("The Length You Entered: " + Lengths + " ft<br>");   //Displays inputted length of the entire court
+			
+			document.write("The Width You Entered: " + Widths + " ft<br>");     //Displays inputted width of the entire court
+			
+			document.write("The Radius You Entered: " + Radiuss + " ft<br><br>");   //Displays inputted radius of one pink circle
+			
+			document.write("<b>Calculated Areas</b>"+"<br>");   //The is the bold title
+			
+			document.write("Total Court Area is " + Math.round( AreaEntireCourt * 100 ) / 100 + " ft<sup>2</sup><br>");  //Displays calculations of entire court Area. I used Math.round here
+			
+			document.write("The Area of the Two Pink Circles is " + AreaTwoCircles.toFixed(2) + " ft<sup>2</sup><br>");   //Displays calculations of two pink circles. I used .toFixed here
+			
+			document.write("The Area of the Two Green Lanes is " + AreaTwoGreenLanes.toFixed(2) + " ft<sup>2</sup><br>");   //Displays calculations of just the green area of the court. I used .toFixed here
+			
+			document.write("The Area of the Yellow Field is " + AreaYellowField.toFixed(2) + " ft<sup>2</sup><br>");   //Displays calculations of just the yellow area of the court. I used .toFixed here
+			
+			window.alert("The Length of All Black Lines is  " + LinearDistanceBlackLines.toFixed(2) + "ft");   //This window alert displays the calculations of all linear black lines. I used .toFixed here
+		
+
+
+    		</SCRIPT>
+
+    		
+		<!-- Mike Truong, 1/23/10, CSC110 distance --> 
+    		
+	</body>
+
+ </html>

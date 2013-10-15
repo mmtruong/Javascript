@@ -1,0 +1,75 @@
+<!-- Mike Truong, CSC110D, 3/15/10, 
+This demonstrates some basic things(such as loops) associated with the array-->
+
+<html>
+  
+	<head><title>Array</title></head>
+  
+	<body bgcolor = "white">  
+    	
+	
+    	
+		<SCRIPT LANGUAGE = "JavaScript">    
+	
+			///Prompts user for a number and adds to new array/////
+			var enterNumber=parseFloat(window.prompt("Please enter any number",""))
+			if(isNaN(enterNumber) || enterNumber.lengths <0  ) {
+			alert(" Yikes! Please try again and re-enter a number");
+			}
+	
+
+			//// Declare and fill a new array.////
+			var nums = new Array( 12, 32, 43, 5, -97, 101, -13, 27 );
+     			var sum=0////Used for the average of array////
+			var index = 0;
+        		document.write("<big>Here is the original array:</big>");
+
+       
+			////Show all values in the array -- use a loop////  
+        		for ( index = 0; index < nums.length; index++ )  {
+        		sum += nums[index]
+			document.write( "<br>" + nums[index] );
+        		}
+	
+	
+			////Show array in reverse order with addition of prompt value////
+			document.write("<br><br><big>Here is the new array in Reverse with the addition of " + enterNumber +" :</big><br>");
+			for ( index = nums.length-1; index >= 0; index-- ){
+			nums[index] += enterNumber;		
+			document.write( nums[index] + "<br> " );
+			}
+
+	
+			////Average of the new array////
+			document.write( "<br><br><big>AVERAGE of the new Array is :</big><br> " + Math.round(sum/nums.length).toFixed(1) );
+
+	
+			////Generate Random number between 5 and 15////
+			document.write("<br><br><big>Here is a random # between 5 and 15:</big>");
+			var Rand=Math.round(Math.random()*10+5)
+			document.write( "<br>"+Rand);
+	
+	
+			////Display All Numbers from new array that is greater than Random#////
+			document.write("<br><br><big>All numbers from the new Array that is GREATER than the random number " + Rand + " :</big>");
+			for ( index = 0; index < nums.length; index++ )  { 
+        		if(nums[index] > Rand){
+			document.write( "<br>" + nums[index] );
+        		}
+			}
+
+	
+			////Highest value number in array////
+			var highest = nums[0];
+    			for ( index = 1; index < nums.length; index++ ){
+        		if ( nums[index] > highest )
+        		highest = nums[index];
+    			}
+    			document.write( "<p><big>The highest value from the new Array is:</big><br> " + highest );
+
+
+    		</SCRIPT>
+   
+  	</body>
+
+</html>

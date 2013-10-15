@@ -1,0 +1,143 @@
+
+<!-- Mike Truong, CSC110D, 2/22/10, 
+This assignment calcuates the tax amount owed based on the inputs that user provides. This assignment is similar to assignment 5 and 6 except we are asked to organize it in modular form-->
+
+
+
+
+
+
+
+<html>	
+	<head><title>Mike's Income Tax Calculato: Modular Form</title></head>	
+	
+	<body>
+		<h3 align=center>Mike's Income Tax Calculator: Modular Form</h3>
+
+		<form name="myForm">
+
+			<b>Enter Your Name</b> <input type="Text" name="TaxPayerName"><p>
+
+			Enter Your Filing Status (Single or Joint or S or J) 
+			<input type="text" name="TaxStatus"><p>
+
+			Enter the income amount you or your household earned in 2009 $
+			<input type="text" name="GrossIncome"><p>
+
+			<input 
+			type=button 
+			value="Calculate Tax Owed" 
+			onClick="calcTax()"> 
+
+			<input 
+			type=button 
+			value="Clear Form" 
+			onClick="clearForm()">
+
+			<div id="output"></div>
+			</form>
+
+			<script language="javascript">
+
+			
+
+			///////--FUNCTION 1--///////This function makes sure that all inputs are within the parameters of all acceptable inputs//// The parameters are UserName, Status, and Income. UserName variable is for the 					////					///username parameter. Status Variable is for the status parameter. Income variable is for the income parameter. All these variables help define the inputted data.
+			
+			function validateInputs(UserName, Status, Income ) { 
+			var goodInputs=true;	 ////This is a "bookkeeping" method used to keep track of all valid(true/false) inputs. If invalid, it will return false. A Boolean concept////
+			
+			if(!isNaN(UserName) || UserName.length < 0  ) { 	////This statement makes sure that the user name field is not left blank or does not contain numbers.
+			alert("Invalid input for your name.\nPlease try again and re-enter your name with no numbers, or do not leave the input field blank.");
+			goodInputs = false;///When goodInputs is false it is not used anymore.////
+			}
+
+			if ( Status.toLowerCase() != "single" && Status.toLowerCase() != "s" && Status.toLowerCase() != "joint" && Status.toLowerCase() != "j") { 	////This statement makes sure that only s, j, Joint, and Single is passed through the function.
+			alert("Invalid input for your status.\nPlease try again and re-enter Single, Joint, s, or j.");
+			goodInputs = false;
+			}
+	
+			if(isNaN(Income) || Income<=0) { 	////This statement makes sure that income has no alphabet inputs, as well as the income not being less than or equal to zero.
+			alert("Invalid input for your income.\nPlease try again and re-enter a number with no letters, or do not leave blank, or enter an income amount greater than zero.");
+			goodInputs = false;
+			}
+			return goodInputs;	///This function returns goodInputs which is all valid inputs. All goodInputs are then used to calculate in the actual coding below.
+			}
+
+			
+			
+			///////--FUNCTION 2--///////This function defines the parameters that the income must be within. It passes through Income and Status. Notice that the last number is 200000000 because I am assuming that no one makes above this amount.
+			function calcTaxRate( Income, Status ){ 
+			var TaxRate;
+			
+			if (Status.toLowerCase() == "s" || Status.toLowerCase() == "single"){
+			if (Income>=0 && Income<=50000 ){ TaxRate = 0.10; }
+			if (Income>=50001 && Income<=100000 ){ TaxRate = 0.15; }			
+			if (Income>=100001 && Income<=150000 ){ TaxRate = 0.20; }
+			if (Income>=150001 && Income<=200000 ){ TaxRate = 0.30; }
+			if (Income>=200001 && Income<=20000000000000 ){ TaxRate = 0.35; }
+			}
+			else if (Status.toLowerCase() == "j" || Status.toLowerCase() == "joint"){
+			if (Income>=0 && Income<=50000){ TaxRate = 0; }
+			if (Income>=50001 && Income<=100000 ){ TaxRate = 0.10; }
+			if (Income>=100001 && Income<=150000){ TaxRate = 0.15; }
+			if (Income>=150001 && Income<=200000  ){ TaxRate = 0.20; }
+			if (Income>=200001 && Income<=20000000000000 ){ TaxRate = 0.25; }		
+			}
+			return TaxRate;  ///This function returns the TaxRate which is the percentage amount that is taxed based on income. This TaxRate is used for actual coding below.
+			}
+
+			
+
+			///////--FUNCTION 3--/////// This function defines what is being displayed to the user once they click calculate. Notice that i used .tofixed(0) so that it would be whole numbers. This has no return in the function because there is no need.
+			function displayResults( UserName, Status, Income, TaxRate ){
+			var message = "Taxes Prepared for " + UserName + "<p>";
+			message += "Declared Income = $" + Income.toFixed(0) + "<p>";
+			message += "Taxes Owed = $" + (TaxRate*Income).toFixed(0);
+			
+			document.getElementById("output").innerHTML = message;
+			}
+
+
+			
+			///////--ACTUAL CODING--/////// This is where all valid inputs are processed and calculated.
+			// the MAIN PROGRAM
+			// this function is the BOSS. It calls the other required functions as they
+			// are needed. Notice that the function names describe what they do.
+			
+			function calcTax(){
+			// get user inputs, just like Assignment #5
+			
+			var userName = document.myForm.TaxPayerName.value;
+			var status = document.myForm.TaxStatus.value;
+			var income = parseFloat( document.myForm.GrossIncome.value );
+
+			// test for invalid input and display error messages
+			// returns boolean true if ALL data is valid
+			// returns boolean false if any data is INVALID
+			
+			var goodInputs = validateInputs( userName, status, income );
+
+			// if inputs are valid, calculate tax rate, then display all results
+			
+			if( goodInputs ) {
+			var taxRate = calcTaxRate( income, status );
+			displayResults( userName, status, income, taxRate );
+			}
+			}
+
+	
+			///////--FUNCTION 4--/////// This function clears the form.
+			function clearForm(){
+			document.myForm.TaxPayerName.value = "";
+			document.myForm.TaxStatus.value = "";
+			document.myForm.GrossIncome.value="";
+			document.getElementById("output").innerHTML = "";
+			}
+		
+		</script>
+	
+	</body>
+
+</html>
+
+			

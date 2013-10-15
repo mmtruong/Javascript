@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- 
+	Name: Very Good Student
+	File: assignment_11.html
+	Date: 3/18/2010
+	Class: CSC 110
+	Purpose:  This program will use two arrays to display country and associated population
+		  information.  It will allow a user to add a new country and population.  It
+		  will allow the user to search for a country and display the cooresponding 
+		  population.  The user will be able to sort the two arrays by country name or
+		  population.
+--><HTML><HEAD><TITLE>The Country Population Program</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 8.00.6001.18854"></HEAD>
+<BODY>
+<H3>The Country Population Program</H3>
+<P><!-- form for input and div tags for output -->
+<FORM name=myForm><!-- input type=button value = "Show Data" onClick="displayArrays( country, population)" --><INPUT onclick="clearOutput('out')" value="Clear Output" type=button> 
+<INPUT onclick="sortByCountry(country, population)" value="Sort by Country" type=button> 
+<INPUT onclick="sortByPopulation(country, population)" value="Sort by Population" type=button> 
+<INPUT onclick=addCountry() value="Add a Country" type=button> <INPUT onclick="searchCountry(country, population)" value="Search for Country" type=button>
+<P></FORM>
+<DIV id=out></DIV><!-- JavaScript code to provide display -->
+<SCRIPT language=JavaScript>
+
+// global declaration of two arrays and their initial data   [ data from   http://en.wikipedia.org/wiki/List_of_countries_by_population ]
+var country = new Array(); var population = new Array();
+
+country[ 0 ]= "China"; population[ 0 ]= 1336370000;
+country[ 1 ]= "India"; population[ 1]= 1178267000;
+country[ 2 ]= "United States"; population[ 2 ]= 308871000;
+country[ 3 ]= "Indonesia"; population[ 3 ]= 231369500;
+country[ 4 ]= "Brazil"; population[ 4 ]= 192617000;
+country[ 5 ]= "Pakistan"; population[ 5 ]= 168976500;
+country[ 6 ]= "Bangladesh"; population[ 6 ]= 162221000;
+country[ 7 ]= "Nigeria"; population[ 7 ]= 154729000;
+country[ 8 ]= "Russia"; population[ 8]= 141927297;
+country[ 9 ]= "Japan"; population[ 9 ]= 127430000;
+
+// a function that generates all HTML to produce a table full of country names and populations
+// parameters: array of countries array of populations
+function displayArrays( cntry, pop ){
+	var message = "<table border='1'><tr><th>Country</th><th>Population</th></tr>";
+	for ( var ix = 0; ix < pop.length; ix++)
+		message += "<tr><td>" + cntry[ix] + "</td><td>" + pop[ix] + "</td></tr>";
+	message += "</table>";
+	document.getElementById("out").innerHTML = message;
+}
+
+
+//##############################################################################
+//
+// Name:	searchCountry
+//
+// Parameters:	arrCountry = The array to be searched.
+//		arrPopulation = The array with population data.
+//
+// Returns:	Nothing
+//
+// Purpose:	This function will prompt a user for a country, then display the
+//		country population if it is found.
+//
+//##############################################################################
+function searchCountry(arrCountry, arrPopulation){
+	var cnty, pop;
+	// 1. Prompt for user input.
+	cnty = prompt("What country do you want to search for?");
+	//    Minimal validation to ensure the user entered a value
+	while (cnty == "")
+		cnty = prompt("You did not enter a country.\nWhat country do you want to search for?");
+	
+	// 2. Process data
+	pop = findCountry(arrCountry, arrPopulation, cnty);
+
+	// 3. Display output
+	//    No error if teh return value is >= 0
+	if (pop >= 0 ) {
+		alert("The population of " + cnty + " is " + pop + ".");
+	} else {
+		alert("The country " + cnty + " was not found.");
+	}
+}
+
+//##############################################################################
+// 
+// Name:	findCountry
+//
+// Paramters:	cnty = The array containing countries to search
+// 		pop = The array containing teh population of the found country
+//		term = The name of the country to search for
+//
+// Returns:	Integer containing the country population
+//
+// Purpose:	The purpose of this function is to ask the user for a country,
+//		find that country, then display the population.  It will return
+//		-1 if the the country is not found in order to indicate an error
+//
+//##############################################################################
+function findCountry(cnty, pop, term) {
+	// Set the return value to -1
+	var tempPop = -1;
+
+	for (i = 0; i < cnty.length; i++) {
+		if (cnty[i].toUpperCase() == term.toUpperCase())
+			tempPop = pop[i];
+	}
+	return tempPop;
+}
+
+//##############################################################################
+//
+// Name:	sortByCountry
+//
+// Parameters:	cnty = The array which contains the list of countries
+//		pop = The array containing the cooresponding populations
+//
+// Returns:	Nothing
+//
+// Purpose:	This function will sort the country and population arrays by the
+//		country name.
+//
+//##############################################################################
+function sortByCountry(cnty, pop) {
+	var tmpCnty, tmpPop;
+	var i,j;
+
+	for(i = 0; i < cnty.length; i++) {
+		for(j = 0; j < cnty.length; j++) {
+			if (cnty[i].toUpperCase() < cnty[j].toUpperCase()) {
+				tmpCnty = cnty[i];
+				cnty[i] = cnty[j];
+				cnty[j] = tmpCnty;
+				tmpPop = pop[i];
+				pop[i] = pop[j];
+				pop[j] = tmpPop;
+			}
+		}
+	}
+	displayArrays(cnty, pop);
+}
+
+//##############################################################################
+//
+// Name: 	sortByPopulation
+//
+// Parameters:	cnty = The array which contains the list of countries
+//		pop = The array containing the cooresponding populations
+//
+// Returns:	Nothing
+//
+// Purpose:	This function will sort the country and population arrays by the
+//		country population.
+//
+//##############################################################################
+function sortByPopulation(cnty, pop) {
+	var tmpCnty, tmpPop, i, j;
+
+	for (i = 0; i < pop.length; i++) {
+		for (j = 0; j < pop.length; j++ ) {
+			if (parseInt(pop[i]) > parseInt(pop[j])) {
+				tmpCnty = cnty[i];
+				cnty[i] = cnty[j];
+				cnty[j] = tmpCnty;
+				tmpPop = pop[i];
+				pop[i] = pop[j];
+				pop[j] = tmpPop;
+			}
+		}
+	}
+	displayArrays(cnty, pop);
+}
+
+//##############################################################################
+//
+// Name:	addCountry
+//
+// Parameters:	country = The name of a country to add to the array
+//		population = The population of the country being added
+//
+// Returns:	Nothing
+//
+// Purpose:	This function requests a country name and population from the
+//		user and adds them the the respective array.  It will also
+//		validate that the user has entered a value and is the population
+//		is a number.
+//
+//##############################################################################
+function addCountry() {
+	var cntry, pop;
+	
+	// 1. Get user input
+	//    Get a country
+	cntry = prompt("Enter a country name.");
+	//    Validate the user has entered a value
+	while (cntry == "")
+		cntry = prompt("You did not enter a country.\nEnter a country name.");
+	//    Get a the population
+	pop = prompt("What is " + cntry + "'s population?");
+	//    Validate a value was entered and the value is a number
+	while (pop == "" || isNaN(pop))
+		pop = prompt("You did not enter a valid population.\nWhat is " + cntry + "'s population?");
+
+	// 2. Process data
+	//    Add the values to the country and population arrays
+	country.push(cntry);
+	population.push(pop);
+
+	// 3. Display results
+	displayArrays(country, population);
+}
+
+//##############################################################################
+//
+// Name:	clearOutput
+//
+// Parameters:	divOut = The name of the output div to clear
+//
+// Returns:	Nothing
+//
+// Purpose:	This function will clear the html contents of the div that has 
+//		been passed into the function.
+//
+//##############################################################################
+function clearOutput(divOut){
+	document.getElementById("out").innerHTML = "";
+}
+
+</SCRIPT>
+</BODY></HTML>

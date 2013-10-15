@@ -1,0 +1,103 @@
+<!-- Mike Truong, CSC110, 1/31/10. 
+
+This program calculates the dimensions of a basic home and its associated heating and SIP costs via variable inputs-->
+
+
+
+
+<html>
+  	
+	<head><title>Mike Truong's Zipper House Estimate Calculater</title></head>
+  
+	<body bgcolor = "white">  
+    	
+	
+    	
+		<SCRIPT LANGUAGE = "JavaScript">    
+
+			
+			
+			/* This block is where all the information is inputted by the user. Also included are some declared variables(fl,fw,wh,rh)*/
+			
+			var names=window.prompt("Please enter your name: ", "Mike Truong");
+			var fl=parseFloat(prompt("Please enter your desired length in feet","20"));  //floor length
+			var fw=parseFloat(prompt("Please enter your desired width in feet","10"));  //floor width
+			var wh=parseFloat(prompt("Please enter your desired height in feet","10"));  //wall height
+			var rh=parseFloat(prompt("Please enter your desired height of the roof in feet","5"));  //roof height
+			
+			
+			
+			/*This block includes my 4 function definitions on the top, then just below is the actual coding for these 4 definitions. Also included is the rest of my variables and calculations.*/			
+			
+			/////Function Definitions/////
+			function areaEntireHouse(fl, fw, wh, rh) {     //This function calculates the area of the entire house. Base of roof= fw
+			return(
+			(2*fw*wh)+
+			(2*fl*wh)+
+			(rh*fw)+
+			(2*fl)*(Math.sqrt(Math.pow(rh,2)+Math.pow(fw/2,2)))
+			);
+			}
+
+			function volumeEntireHouse(fl, fw, wh, rh) {    //This function calculates the volume of the entire house. Base of roof= fw
+			return(
+			(fw*wh*fl) +
+			(0.5*fw*rh*fl)
+			);
+			}
+
+			function longestfloor(fl, fw) {    // This function calculates the longest line between fl and fw. It is the hypoteneuse of fl and fw.
+			return(
+			Math.sqrt(
+			Math.pow(fl,2) + Math.pow(fw,2))
+              		);
+			}
+
+			function highestUpright(wh, rh) {  // This function calculates the longest line from the ground to the ceiling. We had to assume that it was a straight line due to the function only passing through rh and wh.
+			return(
+			(wh+rh)
+			);
+			} 
+
+			/////Actual Coding/////
+			var StraightUp=highestUpright(wh, rh); 
+	                var DiaganolFloor= longestfloor(fl, fw);
+	                var TotalVolume=volumeEntireHouse(fl, fw, wh, rh);
+                        var TotalArea=areaEntireHouse(fl, fw, wh, rh);
+			var SIP=12;//Units are $
+			var HEATING=0.11;//Units are $
+			var SIPcost=SIP*TotalArea;
+			var heatingCost=HEATING*TotalVolume;
+
+			
+			
+			/*This block is where all of the information is displayed. I used .toFixed for 2 sig figs. This block also includes the event handlers table below.
+			The table below displays the highest point and longest floor using Onmouse event handlers. Since html recognizes event handlers, I included it in the html section instead*/
+			
+			document.write( "<b>Design Results for " + names + "</b><br><br>");
+			document.write("Cabin width is " + fw + " ft<br>");
+			document.write("Cabin length is " + fl + " ft<br>");
+			document.write("Cabin height is " + wh + " ft<br>");
+			document.write("Cabin roof height is " + rh +" ft<br>");				
+			document.write("_________________<br><br>");  //I decided to use this method instead of <hr>.
+			document.write("Total area is " + TotalArea.toFixed(2) + " ft<sup>2</sup><br>");
+			document.write("Cabin wall cost is $" + SIPcost.toFixed(2) + "<br>");
+			document.write("Total volume is " + TotalVolume.toFixed(2) + " ft<sup>3</sup><br>");
+			document.write("Cabin heating cost is $" + heatingCost.toFixed(2) +"<br>");
+
+			
+		</SCRIPT>
+   		
+		<table border=1>  <!-- This coding is for the table that uses alert.window method and OnMouse event handler.-->
+			<tr>
+				
+				<br>
+				<td onMouseOver = "alert('is '+ StraightUp.toFixed(2) +' ft');">Longest Upright Thing</td>
+				<td onMouseOver = "alert('is '+ DiaganolFloor.toFixed(2) +' ft');">Longest Thing on Floor</td>
+			
+			</tr>
+		</table>
+
+  	</body>
+
+</html>

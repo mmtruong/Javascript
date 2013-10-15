@@ -1,0 +1,38 @@
+<html>
+  
+	<head>
+		<title>Mike's Employee Payroll</title>
+	</head>
+  
+	<body bgcolor = "white">  
+    	
+		<img src="http://www.musicalley.com/music/producers/prodphotos/computing_dog.jpg"><br>
+	
+		 
+		<h2><b>Mike's Employee Payroll Calculations</b></h2> 
+		
+	
+		<SCRIPT LANGUAGE = "JavaScript">    
+		
+			var names=prompt("Enter Employee Name", "Mike");
+			var hourRate=parseFloat(prompt("Enter Employee Hourly Rate", "25"));
+			var hoursWorked=parseFloat(prompt("Enter Number of Hours Worked", "32"));
+		
+			document.write("Employee Name: " + names +"<br>");
+			document.write("Employee Rate: $" + hourRate +"<br>");
+			document.write("Employee Hours: " + hoursWorked +"<br>");
+		
+			var grossPay = hourRate*hoursWorked;
+
+			document.write("Gross Paycheck: $" + grossPay);
+
+
+			/*  Name: Mike Truong, File name: assgn2.html, Date: 1/16/10, Units for hourRate is $/hour,and hoursWorked is hour  */
+	
+		</SCRIPT>
+   
+ 	 </body>
+
+</html>
+
+

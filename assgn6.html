@@ -1,0 +1,120 @@
+<!-- Mike Truong, CSC110D, 2/14/10
+This is an extension of assignment 5 with included input validation. I used a duplicate of your solution to assignment 5 with my added input validation-->
+
+<html>
+
+	<head><title>Mike's Income Tax Calculator</title></head>
+
+	<h3 align=center>Mike's Income Tax Calculator</h3>
+
+	<form name="taxForm">
+
+		<b>Enter Your Name</b> <input type="Text" name="taxPayer"><p>
+
+		Enter Your Filing Status (Single or Joint or S or J) 
+		<input type="text" name="status"><p>
+
+		Enter the income amount you or your household earned in 2009 $
+		<input type="text" name="income"><p>
+
+		<input 
+		type=button 
+		value="Calculate Tax Owed" 
+		onClick="calculateTax()"> 
+
+		<input 
+		type=button 
+		value="Clear Form" 
+		onClick="clearForm()">
+
+	</form>
+
+		<div id="output"></div>
+
+	<body>
+
+		<script language="javascript">
+
+
+			/////Function///////
+			function calculateTax(){
+		
+			//////INPUT/////// 
+			var goodInput=true;
+			var taxedName = document.taxForm.taxPayer.value;
+			var taxStatus = document.taxForm.status.value;
+			var taxableIncome = parseFloat(document.taxForm.income.value);
+	
+			
+			////INPUT VALIDATION//// This defines the parameters that the input must be within.	
+			
+
+
+			if(!isNaN(taxedName) || taxedName.length < 0  ) {  ///This validation assures that no number can be inputted and that it is not left "blank."
+			alert("Invalid input for your name.\nPlease try again and re-enter your name with no numbers, or do not leave the input field blank");
+			goodInput = false;
+			}
+
+			if ( taxStatus.toLowerCase() != "single" && taxStatus.toLowerCase() != "s" && taxStatus.toLowerCase() != "joint" && taxStatus.toLowerCase() != "j") {////This validation assures 			that all input is s, j, single, or joint. 
+			alert("Invalid input for your status.\nPlease try again and re-enter Single, Joint, s, or j");
+			goodInput = false;
+			}
+	
+			if(isNaN(taxableIncome) || taxableIncome<=0) { ///This validation assures that there should be no alphabet input and the entry cannot be left "blank." The number "zero" is also 			not acceptable.
+			alert("Invalid input for your income.\nPlease try again and re-enter a number with no letters, or do not leave blank, or enter a income amount greater than zero");
+			goodInput = false;
+			}
+	
+			
+			///////DECIDE AND CALCULATE////// This is where the calculations are made and decided if "goodInput" is inputted.
+			if (goodInput) {
+
+			if ( taxStatus.toLowerCase() == "s" || taxStatus.toLowerCase() == "single")
+    			taxStatus="Single";
+			else
+   			taxStatus="Joint";
+			var rate = 0;
+
+	
+			if( taxStatus=="Single") {
+   	 		if( taxableIncome <= 50000 ) rate = .10;
+   	 		else if( taxableIncome <= 100000 ) rate = .15;
+   	 		else if( taxableIncome <= 150000 ) rate = .2;
+  	 	 	else if( taxableIncome <= 200000 ) rate = .3;
+   	 		else rate = .35;
+			}
+
+
+	 		else{
+         		if( taxableIncome <= 50000 ) rate = .0;
+  	 		else if( taxableIncome <= 100000 ) rate = .1;
+    			else if( taxableIncome <= 150000 ) rate = .15;
+    			else if( taxableIncome <= 200000 ) rate = .2;
+    			else rate = .25;
+			}
+			var taxAmount = rate * taxableIncome 
+
+
+			//////DISPLAY AND OUTPUT/////
+			var message = "Taxes Prepared for " + taxedName + "<p>";
+			message += "Declared Income = $" + taxableIncome + "<p>";
+			message += "Taxes Owed = $" + taxAmount;
+
+		
+			document.getElementById("output").innerHTML = message;
+			}
+			}
+
+			////FUNCTION//// This function clears the form.
+			function clearForm(){
+			document.taxForm.taxPayer.value = "";
+			document.taxForm.status.value = "";
+			document.taxForm.income.value="";
+			document.getElementById("output").innerHTML = "";
+			}
+		
+		</script>
+	
+	</body>
+
+</html>

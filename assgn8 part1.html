@@ -1,0 +1,133 @@
+<!--
+    Mike Truong, CSC110D, 3/1/10, assgn8 part1
+-->
+
+<html>
+<head>
+  <title>Ten Simple Counting Loops</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+    // FINISH THIS PROJECT BY FOLLOWING THE INSTRUCTIONS BELOW C A R E F U L L Y.
+    // THE FINISHED PROJECT SHOWS RESULTS IN 10 TABLE CELLS.
+    // Be aware of the FIVE ELEMENTS OF A LOOP as you complete this project.
+    
+    var count;
+// set up table
+document.write( "<h2>Ten Simple Loops:</h2>"
+              + "<table border = '1' width = '500'><tr><th valign='top'>" );
+    
+    // #1 count up from 1 to 10 using a for loop
+    
+	for ( count = 1; count <= 10; count++ )
+        document.write( count + "<br>" );
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+    
+    // #2 count up from -5 to +5 using a for loop
+    
+	for ( count = -5; count <= 5; count++ )
+        document.write( count + "<br>" );
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #3 WRITE A LOOP TO SHOW A... 
+    // count up from -5 to +5 using a while loop
+	
+	count = -5;
+	while (count <=5 ) {
+	document.write(count + "<br>");
+	count += 1 ;
+	}
+    
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #4 WRITE A LOOP TO SHOW A... 
+    // count up from -5 to +5 using a do loop
+	
+	count = -5;
+	do {
+	document.write( count + "<br>");
+	count += 1 ;
+	} while (count <= 5);
+
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #5 WRITE A LOOP TO SHOW A... 
+    // count down from +5 to -5 using a for loop
+	
+	for (count = 5; count >= -5; count--) 
+	document.write( count + "<br>");
+
+
+document.write( "</th></tr><tr><th valign='top'>" ); // go to next cell
+
+    // #6 WRITE A LOOP TO SHOW A...
+    // count down from +5 to -5 using a do loop
+	
+	count = 5;
+	do {
+	document.write( count + "<br>");
+	count -= 1 ;
+	} while (count >= -5);
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #7 WRITE A LOOP TO SHOW A...
+    // count up from 10 to 100
+    // with a step size of 10 using a while loop
+	
+	count = 10;
+	while (count <=100 ) {
+	document.write(count + "<br>");
+	count += 10 ;
+	}
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #8 WRITE A LOOP TO SHOW A...
+    // count down from 100 to 76
+    // with a step size of 3 using a for loop
+	
+	for (count = 100; count >= 76; count-=3) 
+	document.write( count + "<br>");
+
+
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #9 WRITE A LOOP TO SHOW A...
+    // count DOWN from 1000 to 1 using a while loop
+    // divide the value of the counter in half with each
+    // pass, and ROUND DOWN to the nearest whole number
+    // (What method can be used to round DOWN a positive number?)
+	
+	count = 1000;
+	while (count >=1 ) {
+	document.write(Math.floor(count) + "<br>");
+	count *=  0.5;
+	}
+
+
+document.write( "</th><th valign='top'>" ); // go to next cell
+
+    // #10 USE A FOR LOOP to show the squares of the numbers from
+    // 10 to 20 (hint: the loop simply counts, but the square
+    // of the counter is written to the web page)
+
+	for ( count = 10; count <= 20; count++ )
+        document.write( Math.pow(count,2) + "<br>" );
+
+
+
+// FINISH TABLE
+document.write( "</th></tr></table>" );
+
+</script>
+
+</body>
+</html>

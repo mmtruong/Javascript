@@ -1,0 +1,121 @@
+<!--Mike Truong, 3/7/10, CSC110D,
+ This web page displays the count between two numbers-->
+
+
+<html>
+  
+	<head><title>Number Count</title></head>
+	
+	<h3><b>The Number Counter Program</b></h3>
+	
+	<p>Enter any number between -100 and 100 and it will display the count between the two numbers and the total of all numbers.</p>
+  
+	<body bgcolor = "white">  
+    	
+			
+
+		<form name="myForm">
+
+			
+			First Number
+			<input type="text" name="firstNumber"><p>
+
+			Second Number
+			<input type="text" name="secondNumber"><p>
+
+			<input 
+			type=button 
+			value="Display Count" 
+			onClick="calcCount()"> 
+
+			<input 
+			type=button 
+			value="Clear Form" 
+			onClick="clearForm()">
+
+			<div id="output"></div>
+			
+		</form>
+
+    	
+		
+
+		<SCRIPT LANGUAGE = "JavaScript">    
+		
+			/////FUNCTIONS/////
+		
+			////Function 1//// This function validates all good data. The parameters numberone and numbertwo are both inputs between -100 and 100. The return goodInputs feeds back all true(good) data which is then calculated by another calcCount function.
+			function validateInputs(numberone, numbertwo) {
+			var goodInputs=true;
+	 
+		 	if(isNaN(numberone) || numberone < -100 || numberone > 100 || numberone.lengths <0  ) {
+		 	alert("Invalid input. \n Please try again and re-enter a number between -100 and 100 in First Number");
+		 	goodInputs = false;
+			 }
+
+		 	if(isNaN(numbertwo) || numbertwo < -100 || numbertwo > 100 || numbertwo.lengths <0  ){ 
+		 	alert("Invalid input. \n Please try again and re-enter a number between -100 and 100 in Second Number");
+		 	goodInputs = false;
+		 	}
+		
+			return goodInputs;	 
+		 	}
+ 			
+
+
+			////Function 2//// This function counts all true data and displays it on the web page. It also displays the total. The parameters numberone and number two are both inputs between -100 and 100. 
+			function CountAndDisplayResults(numberone, numbertwo) {
+			if (numberone>numbertwo) {
+			var counter = numberone;
+			var sum=0
+			while (counter >=numbertwo ) {
+			document.getElementById("output").innerHTML +=(counter + "<br>");
+			sum+=counter;
+			counter -= 1 ;
+			}
+			}
+
+			else if (numbertwo>numberone) {
+			var counter = numberone;
+			var sum=0
+			while (counter <= numbertwo ) {
+			document.getElementById("output").innerHTML+=(counter + "<br>");
+			sum+=counter;
+			counter += 1 ;
+			}
+			}
+		 	
+			document.getElementById("output").innerHTML+=( "Total: " + sum );
+			}
+		
+		
+			
+			///////ACTUAL CODING//////
+			
+			////Function 3//// This function does the actual calculations using all true data when clicked.////
+			function calcCount(){
+			var one= parseFloat(document.myForm.firstNumber.value);
+			var two= parseFloat(document.myForm.secondNumber.value);
+		
+			var goodInputs = validateInputs( one, two );
+			
+			if (goodInputs) {
+			CountAndDisplayResults(one, two);
+			}
+			}
+
+
+
+			////Function 4////This function clears the form////
+			function clearForm(){
+			document.myForm.firstNumber.value = "";
+			document.myForm.secondNumber.value = "";
+			document.getElementById("output").innerHTML = "";
+			}
+
+
+    		</SCRIPT>
+   
+  	</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!-- The country population program starter code
+	CSC 110 Assignment #11
+	Add the following functions to this starter code to make it more useful
+		1) add a button that allows the user to enter a new country and its population
+		2) add a button that sorts then displays the countries and their populations by country name (alphabetical)
+		3) add a button that sorts then displays the countries and their populations by population
+		4) change the original display button (which is no longer needed) to a clearForm behavior
+-->
+
+<html>
+	<head><title>The Country Population Program</title></head>
+
+	<body>
+	<h3>Mike's Neighbors and their Population</h3><p>
+	
+	
+	<form name="myForm">
+		<input type=button value="Click to search for country" onClick="search(country)"><p>
+		
+		<input type=button value = "Sort by Population Descending" onClick=" sortPopulation(country, population);displayArrays(
+		country, population )"><p>
+		
+		<input type=button value = "Sort by Country Ascending" onClick="  sortCountry(country,population);displayArrays(
+		country, population )"><p>
+		
+		<input type=button value="Click to add a country" onClick="Add()"><p>
+		
+		<input type=button value="Clear Form" onClick="clearForm()">
+
+	</form>
+
+	<div id="out"></div>
+		
+		
+
+
+
+	<script language="JavaScript">
+	
+		
+		
+		
+		var country = new Array(); var population = new Array();
+		
+		country[ 0 ]= "China"; population[ 0 ]= 1336370000;
+		country[ 1 ]= "India"; population[ 1]= 1178267000;
+		country[ 2 ]= "United States"; population[ 2 ]= 308871000;
+		country[ 3 ]= "Indonesia"; population[ 3 ]= 231369500;
+		country[ 4 ]= "Brazil"; population[ 4 ]= 192617000;
+		country[ 5 ]= "Pakistan"; population[ 5 ]= 168976500;
+		country[ 6 ]= "Bangladesh"; population[ 6 ]= 162221000;
+		country[ 7 ]= "Nigeria"; population[ 7 ]= 154729000;
+		country[ 8 ]= "Russia"; population[ 8]= 141927297;
+		country[ 9 ]= "Japan"; population[ 9 ]= 127430000;
+		
+		
+		function sortPopulation( cntry, pop ){ //This function sorts out the population in descending order. Swapping was used to display two array at once.
+		var ix, j, CurrentSwap, temp;
+		population.sort(function(a,b){return b - a});
+		for ( var ix = 0; ix < pop.length; ix++){
+		CurrentSwap = ix;
+		temp = cntry[ix];	cntry[ix] = cntry[CurrentSwap];////Swapping
+		cntry[CurrentSwap] = temp;
+		temp = pop[ix];	pop[ix] = pop[CurrentSwap];	pop[CurrentSwap] = temp;
+		}		
+		}
+		
+
+		function sortCountry(cntry, pop){///This function sorts out the countries in ascending order. Swapping was used to display two array at once.
+		var ix, j, CurrentSwap, temp;
+		for ( ix = 0; ix < cntry.length -1; ix++ ){
+		CurrentSwap = ix;//Swapping
+		for ( j = ix + 1; j < cntry.length; j++ ){
+		if ( cntry[j] < cntry[CurrentSwap] ){
+		CurrentSwap = j;
+		}	
+		}
+		temp = cntry[ix];	cntry[ix] = cntry[CurrentSwap];//Swapping
+		cntry[CurrentSwap] = temp;
+		temp = pop[ix];	pop[ix] = pop[CurrentSwap];	pop[CurrentSwap] = temp;
+		}		
+		}
+
+		
+		function displayArrays( cntry, pop ){ ///This function displays the country and population
+		var message = "<table border='1'><tr><th>Country</th><th>Population</th></tr>";
+		for ( var ix = 0; ix < pop.length; ix++)
+		message += "<tr><td>" + cntry[ix] + "</td><td>" + pop[ix] + "</td></tr>";
+		message += "</table>";
+		document.getElementById("out").innerHTML = message;
+		}
+
+		
+		function search( enterCountry){	 ///This function searches for a country				
+		var enterCountry =  window.prompt( "Enter a country", "" )
+		if ( isNaN(enterCountry)||enterCountry.lengths== 0 ){ ///input validation  
+		find(enterCountry);
+		}
+		else { alert( "Please enter a country from the list to find the population" ); 
+		search(enterCountry ); 		
+		}		
+		}
+
+		
+		function find(searchCountry) {  //This functon works hand in hand with search() function. It searches for countries from the array.
+		if (searchCountry.charAt( 0 ) == "C" || searchCountry.charAt( 0) == "c" ) {
+		document.getElementById("out").innerHTML += country[0] +"--"+ population[ 0 ];
+		}
+		if ((searchCountry.charAt( 0 ) == "I" && searchCountry.charAt( 4) == "A")||(searchCountry.charAt( 0) == "i" && searchCountry.charAt( 4 ) == "a")) {
+		document.getElementById("out").innerHTML += country[1] +"--"+ population[ 1];
+		}
+		if (searchCountry.charAt( 0 ) == "U"||searchCountry.charAt( 0 ) == "u" ) {
+		document.getElementById("out").innerHTML += country[2]  +"--"+ population[ 2 ];
+		}
+		if ((searchCountry.charAt( 0 ) == "I"&& searchCountry.charAt( 3) == "O")||(searchCountry.charAt( 0) == "i" && searchCountry.charAt( 3 ) == "o")) {
+		document.getElementById("out").innerHTML += country[3] +"--"+ population[ 3];
+		}
+		if ((searchCountry.charAt( 0 ) == "B"&& searchCountry.charAt( 3) == "Z")||(searchCountry.charAt( 0) == "b"&& searchCountry.charAt( 3) == "z")) {
+		document.getElementById("out").innerHTML += country[4] +"--"+ population[ 4];
+		}
+		if (searchCountry.charAt( 0 ) == "P"||searchCountry.charAt( 0 ) == "p" ) {
+		document.getElementById("out").innerHTML += country[5] +"--"+ population[ 5 ];
+		}
+		if ((searchCountry.charAt( 0 ) == "B"&&searchCountry.charAt( 1) == "A")||(searchCountry.charAt( 0) == "b"&& searchCountry.charAt( 1) == "a")) {
+		document.getElementById("out").innerHTML += country[6] +"--"+ population[ 6 ];
+		}
+		if (searchCountry.charAt( 0 ) == "N"||searchCountry.charAt( 0 ) == "n" ) {
+		document.getElementById("out").innerHTML += country[7] +"--"+ population[ 7 ];
+		}
+		if (searchCountry.charAt( 0 ) == "R"||searchCountry.charAt( 0 ) == "r" ) {
+		document.getElementById("out").innerHTML += country[8]+"--"+population[ 8 ];
+		}
+		if (searchCountry.charAt( 0 ) == "J"||searchCountry.charAt( 0 ) == "j" ) {
+		document.getElementById("out").innerHTML += country[9] +"--"+ population[ 9 ];
+		}
+		}
+		
+		
+		function Add( AddCountry){ ///Function prompts and adds new country and population by pushing. Extra credit.					
+		var enterCountry =  window.prompt( "Enter a country", "" )
+		var enterPopulation = window.prompt( "Enter a population for that country", "" )
+		if ( isNaN(enterCountry) && !isNaN(enterPopulation) ){   
+		country.push(enterCountry);
+		population.push(enterPopulation);
+		}
+		else { alert( "Please enter a country and population" ); 
+		Add(AddCountry);	
+		}		
+		}
+
+		
+		function clearForm(){ //Function clears the form
+		document.getElementById("out").innerHTML = "";
+		}
+		
+
+
+
+	</script>
+
+	</body>
+</html>

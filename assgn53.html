@@ -1,0 +1,135 @@
+<!--Mike Truong, assgn52.html, 2/08/10
+  This program takes income, name, and status inputs from the user and calculates the amount of tax owed-->
+
+
+
+
+<html>
+  
+	<head><title>Mike's Tax Calculator</title></head>
+
+  	<body>
+
+    		<h2><center> Mike's Income Tax Calculations</center></h2><br>
+
+		
+    		<!--This form was used to create the text fields and buttons-->
+    		<form name="userInput">
+
+      			Enter your legal name:
+      			<input type="text" name="theirName">
+     			 <br>
+
+     			 Enter filing status( Enter<b> "S or Single"</b> for Single, or <b>"J or Joint"</b> for Joint ): <!--I decided on the input as "S" ,single, "J", and joint only.-->
+			<input type="text" name="theirStatus">
+     			  <br>
+
+			Enter your income:$
+			<input type="text" name="theirIncome">
+      			 <br> <br>
+	
+      			<!--These buttons call on a function event handler-->
+      			<input type="button" 
+                	name="taxButton"
+                	value="Calculate Tax"
+                	onClick= "calcTax()">
+
+     
+                	<input type="button"
+                	name="clearButton"
+                	value="Clear Form"
+                	onClick= "clearForm()">
+      			<br><br>
+    
+
+			<div  id = "output"></div>
+
+		</form>
+	 
+	
+
+		 <script language="javascript">
+		
+		
+				////FUNCTION/////This is my function using Onclick event handler that calculates my tax
+				function calcTax(){
+				
+				///INPUT//////This is my input and decalred variables for the function
+				
+				var goodInput = true;
+				var theName = document.userInput.theirName.value;
+				var theIncome = parseFloat(document.userInput.theirIncome.value);
+				var theStatus =document.userInput.theirStatus.value; //The inout only accepts s,S,j,and J
+				var taxes;
+				var display="";
+				theStatus = theStatus.toLowerCase(); ///This makes lowercase into upper case
+				
+
+
+				////Input Validation////
+				if(!isNaN(theName) || theName.length < 0  ) {
+				alert("Invalid input for your name.\nPlease try again and re-enter your name");
+				goodInput = false;
+				}
+
+				if ( theStatus.toLowerCase() != "single" && theStatus.toLowerCase() != "s" && theStatus.toLowerCase() != "joint" && theStatus.toLowerCase() != "j") {
+				alert("Invalid input for your status.\nPlease try again and re-enter s, Single, j, or Joint");
+				goodInput = false;
+				}
+				
+
+				////CALCULATE AND DECIDE/////This is my decision statement that decides which equation to use. Notice the last 					number is 200000000000 since we are dealing with ordinary income.
+				
+				if (goodInput} {
+				
+				if (( theIncome >= 0 && theIncome <=50000) && (theStatus =="S"|| theStatus=="SINGLE")){
+				taxes=theIncome*.1}
+				else if ( theIncome >= 0 && theIncome <=50000){
+				taxes=theIncome*0}
+
+				if (( theIncome >= 50001 && theIncome <=100000) && (theStatus =="S"|| theStatus=="SINGLE")){
+				taxes=theIncome*.15}
+				else if ( theIncome >= 50001 && theIncome <=100000){
+				taxes=theIncome*.1}
+
+				if (( theIncome >= 100001 && theIncome <=150000) && (theStatus =="S"|| theStatus=="SINGLE")){
+				taxes=theIncome*.2}
+				else if ( theIncome >= 100001 && theIncome <=150000){
+				taxes=theIncome*.15}
+
+				if (( theIncome >= 150001 && theIncome <=200000) && (theStatus =="S"|| theStatus=="SINGLE")){
+				taxes=theIncome*.3}
+				else if ( theIncome >= 150001 && theIncome <=200000){
+				taxes=theIncome*.2}
+				
+				if (( theIncome >= 200000 && theIncome <=2000000000000) && (theStatus =="S"|| theStatus=="SINGLE")){
+				taxes=theIncome*.35}
+				else if ( theIncome >= 200000 && theIncome <=2000000000000){
+				taxes=theIncome*.25}
+				
+
+				
+				////OUTPUT/////This is used to display my outputs
+				display += "<b>Tax prepared for: </b>" + theName + 
+				 "<br> <b>Declared income:</b>$" + theIncome + 
+				"<br> <b>Tax owed:</b>$" + taxes.toFixed(2);
+				
+				document.getElementById("output").innerHTML = display;
+				}
+				}
+
+				////FUNCTION////This function clears the form
+				function clearForm( )  {
+				document.userInput.theirName.value = "";
+				document.userInput.theirStatus.value = "";
+				document.userInput.theirIncome.value = "";
+				document.getElementById("output").innerHTML= "";
+				}
+				
+		</script>
+ 	 
+
+	</body>
+
+
+</html>	
